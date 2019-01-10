@@ -10,6 +10,8 @@ import tempfile
 import urllib.request
 from distutils.version import LooseVersion as V
 
+from pathlib import Path
+
 
 def md5_file(fname):
     """
@@ -61,7 +63,10 @@ def download_miniconda_installer(version, md5sum):
 def install_miniconda(installer_path, prefix):
     """
     Install miniconda with installer at installer_path under prefix
+    print(installer_path)
     """
+    print(installer_path)
+    print(list(sorted(Path(installer_path).glob("*"))))
     subprocess.check_output([
         '/bin/bash',
         installer_path,
