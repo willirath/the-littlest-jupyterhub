@@ -95,8 +95,8 @@ sckuXINIU3DFWzZGr0QrqkuE/jyr7FXeUJj9B7cLo+s/TXo+RaVfi3kOc9BoxIvy
 =CLGF
 -----END PGP PUBLIC KEY BLOCK-----
     """.strip()
-    apt.trust_gpg_key(key)
-    apt.add_source('nodesource', 'https://deb.nodesource.com/node_10.x', 'main')
+    # apt.trust_gpg_key(key)
+    # apt.add_source('nodesource', 'https://deb.nodesource.com/node_10.x', 'main')
     apt.install_packages(['nodejs'])
 
 
