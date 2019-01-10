@@ -67,7 +67,7 @@ def install_miniconda(installer_path, prefix):
     """
     print(installer_path)
     print(Path(installer_path).exists())
-    subprocess.check_output([
+    subprocess.call([
         '/bin/bash',
         installer_path,
         '-u', '-b',
