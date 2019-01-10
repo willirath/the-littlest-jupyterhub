@@ -40,10 +40,10 @@ def install_packages(packages):
     Install debian packages
     """
     # Check if an apt-get update is required
-    if len(os.listdir('/var/lib/apt/lists')) == 0:
-        subprocess.check_output(['apt-get', 'update', '--yes'], stderr=subprocess.STDOUT)
+    # if len(os.listdir('/var/lib/apt/lists')) == 0:
+    #     subprocess.check_output(['apt-get', 'update', '--yes'], stderr=subprocess.STDOUT)
     subprocess.check_output([
-        'apt-get',
+        'yum',
         'install',
-        '--yes'
+        '-y'
     ] + packages, stderr=subprocess.STDOUT)
