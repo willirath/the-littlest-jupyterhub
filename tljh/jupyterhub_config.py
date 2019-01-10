@@ -47,7 +47,7 @@ c.ConfigurableHTTPProxy.should_start = False
 c.ConfigurableHTTPProxy.api_url = 'http://127.0.0.1:15002'
 
 c.SystemdSpawner.extra_paths = [os.path.join(USER_ENV_PREFIX, 'bin')]
-c.SystemdSpawner.default_shell = '/bin/bash'
+c.SystemdSpawner.default_shell = '/usr/bin/bash'
 # Drop the '-singleuser' suffix present in the default template
 c.SystemdSpawner.unit_name_template = 'jupyter-{USERNAME}'
 
