@@ -1,5 +1,6 @@
 """Traefik installation and setup"""
 import hashlib
+import logging
 import os
 import time
 from urllib.request import urlretrieve
@@ -7,6 +8,8 @@ from urllib.request import urlretrieve
 from jinja2 import Template
 
 from tljh.configurer import load_config
+
+logger = logging.getLogger("tljh")
 
 # FIXME: support more than one platform here
 plat = "linux-amd64"
