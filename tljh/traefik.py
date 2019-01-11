@@ -48,17 +48,21 @@ def ensure_traefik_binary(prefix, times=4):
         "http://github.com/containous/traefik/releases"
         f"/download/v{traefik_version}/traefik_{plat}"
     )
-    print(f"Downloading traefik {traefik_version}...")
+    print(f"Downloading traefik {traefik_version} from {traefik_url} ...")
     # download the file
     for i in range(times):
+        last_try = (i+1 == times)
         try:
             logger.info("Retrieve traefik binary ({}/{} tries)".format(
                 i+1, times))
             urlretrieve(traefik_url, traefik_bin)
             break
         except ConnectionResetError as c:
-            time.sleep(2)
-            continue
+            if last_try:
+                raise
+            else:
+                time.sleep(2)
+                continue
     os.chmod(traefik_bin, 0o755)
 
     # verify that we got what we expected
