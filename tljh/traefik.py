@@ -1,6 +1,7 @@
 """Traefik installation and setup"""
 import hashlib
 import os
+import time
 from urllib.request import urlretrieve
 
 from jinja2 import Template
@@ -26,7 +27,7 @@ def checksum_file(path):
     return hasher.hexdigest()
 
 
-def ensure_traefik_binary(prefix):
+def ensure_traefik_binary(prefix, times=4):
     """Download and install the traefik binary"""
     traefik_bin = os.path.join(prefix, "bin", "traefik")
     if os.path.exists(traefik_bin):
@@ -46,7 +47,15 @@ def ensure_traefik_binary(prefix):
     )
     print(f"Downloading traefik {traefik_version}...")
     # download the file
-    urlretrieve(traefik_url, traefik_bin)
+    for i in range(times):
+        try:
+            logger.info("Retrieve traefik binary ({}/{} tries)".format(
+                i+1, times))
+            urlretrieve(traefik_url, traefik_bin)
+            break
+        except ConnectionResetError as c:
+            time.sleep(2)
+            continue
     os.chmod(traefik_bin, 0o755)
 
     # verify that we got what we expected
@@ -81,4 +90,3 @@ def ensure_traefik_config(state_dir):
     # ensure acme.json exists and is private
     with open(os.path.join(state_dir, "acme.json"), "a") as f:
         os.fchmod(f.fileno(), 0o600)
-
