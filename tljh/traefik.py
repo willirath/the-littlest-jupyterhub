@@ -45,7 +45,7 @@ def ensure_traefik_binary(prefix, times=4):
             os.remove(traefik_bin)
 
     traefik_url = (
-        "https://github.com/containous/traefik/releases"
+        "http://github.com/containous/traefik/releases"
         f"/download/v{traefik_version}/traefik_{plat}"
     )
     print(f"Downloading traefik {traefik_version}...")
